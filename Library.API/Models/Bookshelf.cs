@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Library.API.models
+namespace Library.API.Models
 {
     public class Bookshelf : BaseEntity
     {

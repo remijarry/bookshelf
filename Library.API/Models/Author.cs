@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Library.API.models
+namespace Library.API.Models
 {
     public class Author : BaseEntity
     {

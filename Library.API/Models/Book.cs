@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Library.API.models
+namespace Library.API.Models
 {
     public class Book : BaseEntity
     {

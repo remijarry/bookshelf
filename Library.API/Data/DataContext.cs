@@ -1,5 +1,5 @@
 using System;
-using Library.API.models;
+using Library.API.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace Library.API.Data
@@ -13,7 +13,7 @@ namespace Library.API.Data
         public DbSet<Author> Authors { get; set; }
         public DbSet<Genre> Genres { get; set; }
         public DbSet<Review> Reviews { get; set; }
-
+        public DbSet<User> Users { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 

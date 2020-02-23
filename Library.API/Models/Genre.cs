@@ -1,4 +1,4 @@
-namespace Library.API.models
+namespace Library.API.Models
 {
     public class Genre : BaseEntity
     {
