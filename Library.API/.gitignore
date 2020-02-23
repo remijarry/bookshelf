@@ -5,3 +5,5 @@ storage.ide
 db.lock
 .dtbcache
 .suo
+*.db
+appsettings.json
