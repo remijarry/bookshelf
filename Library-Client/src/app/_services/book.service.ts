@@ -25,4 +25,12 @@ export class BookService {
       })
     );
   }
+
+  getToReadBooks() {
+    return this.httpClient.get(`${this.baseUrl}toread/${this.userId}`).pipe(
+      map((response: Book[]) => {
+        return response;
+      })
+    );
+  }
 }

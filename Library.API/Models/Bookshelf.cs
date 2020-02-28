@@ -17,11 +17,8 @@ namespace Library.API.Models
 
         public void AddBook(Book book)
         {
-            if (!Books.Any(b => b.BookshelfId == Id))
-            {
-                Books.Add(new BookshelfBook { Book = book });
-                return;
-            }
+            Books.Add(new BookshelfBook { Book = book });
+            return;
         }
 
         public void RemoveBook(int bookId)

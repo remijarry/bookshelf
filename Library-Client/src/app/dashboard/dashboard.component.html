@@ -114,7 +114,18 @@
 
                     </div>
                     <div class="card-body">
-                        Caroussel coming here
+                        <carousel [noPause]="false" class="d-flex justify-content-center">
+                            <slide *ngFor="let book of toReadBooks">
+                                <div class="card lift" style="width: 8rem;">
+                                    <img src="{{book.imageLink}}" class="card-img-top" alt="book cover">
+                                    <!-- Text -->
+                                    <p class="small text-muted mb-3 text-center pt-1">
+                                        {{book.title}}
+                                    </p>
+
+                                </div>
+                            </slide>
+                        </carousel>
                     </div>
                 </div>
             </div>
@@ -129,9 +140,15 @@
                             Reading Now
                         </h4>
                     </div>
-                    <div class="card-body">
-                        <span> List of books coming here</span>
+                    <div class="card-body d-flex flex-wrap">
+                        <div *ngFor="let book of readingBooks" class="card lift mr-2" style="width: 8rem;">
+                            <img src="{{book.imageLink}}" class="card-img-top" alt="book cover">
+                            <!-- Text -->
+                            <p class="small text-muted mb-3 text-center pt-1">
+                                {{book.title}}
+                            </p>
 
+                        </div>
                     </div>
                 </div>
             </div>

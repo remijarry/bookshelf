@@ -10,6 +10,7 @@ import { AuthService } from '../_services/auth.service';
 })
 export class DashboardComponent implements OnInit {
   readingBooks: Book[];
+  toReadBooks: Book[];
   userId: number;
 
   constructor(
@@ -22,5 +23,8 @@ export class DashboardComponent implements OnInit {
     this.bookService
       .getReadingBooks()
       .subscribe(next => (this.readingBooks = next));
+    this.bookService
+      .getToReadBooks()
+      .subscribe(next => (this.toReadBooks = next));
   }
 }

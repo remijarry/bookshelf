@@ -22,12 +22,12 @@ namespace Library.API.Data.Repositories
 
         public async Task<List<Book>> GetReadingBooks(int userId)
         {
-            return await _context.Books.Where(b => b.BookshelveBooks.Any(b => b.Bookshelf.Name == "Reading")).ToListAsync();            
+            return await _context.Books.Where(b => b.BookshelveBooks.Any(b => b.Bookshelf.Name == "Reading")).ToListAsync();
         }
 
         public async Task<List<Book>> GetToReadBooks(int userId)
         {
-            return await _context.Books.Where(b => b.BookshelveBooks.Any(b => b.Bookshelf.Name == "To read")).ToListAsync();            
+            return await _context.Books.Where(b => b.BookshelveBooks.Any(b => b.Bookshelf.Name == "To read")).ToListAsync();
         }
     }
 }

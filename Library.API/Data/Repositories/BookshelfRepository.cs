@@ -50,9 +50,14 @@ namespace Library.API.Data.Repositories
         {
             var book = await _context.Books.FirstOrDefaultAsync(b => b.Id == bookId);
             var bookshelve = await _context.Bookshelves.Include(b => b.Books).FirstOrDefaultAsync(bs => bs.Id == bookshelfId);
-            var bookshelveBook = new BookshelfBook() { BookId = book.Id, BookshelfId = bookshelve.Id };
-            _context.BookshelfBooks.Add(bookshelveBook);
-            await _context.SaveChangesAsync();
+            
+            if (!bookshelve.Books.Any(b => b.BookId == book.Id))
+            {
+                var bookshelveBook = new BookshelfBook() { BookId = book.Id, BookshelfId = bookshelve.Id };
+                _context.BookshelfBooks.Add(bookshelveBook);
+                await _context.SaveChangesAsync();
+
+            }
         }
     }
 }

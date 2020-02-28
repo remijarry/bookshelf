@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { CarouselModule } from 'ngx-bootstrap';
 
 import { AppComponent } from './app.component';
 import { BookComponent } from './Book/Book.component';
@@ -34,6 +35,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     FormsModule,
     RouterModule.forRoot(appRoutes),
     BsDropdownModule.forRoot(),
+    CarouselModule.forRoot(),
     BrowserAnimationsModule
   ],
   providers: [AuthService, ErrorInterceptorProvider],

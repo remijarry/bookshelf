@@ -19,5 +19,11 @@ namespace Library.API.Controllers
         {
             return Ok(await _bookRepository.GetReadingBooks(userId));
         }
+
+        [HttpGet("toread/{userId}")]
+        public async Task<IActionResult> GetToReadBooks(int userId)
+        {
+            return Ok(await _bookRepository.GetToReadBooks(userId));
+        }
     }
 }
