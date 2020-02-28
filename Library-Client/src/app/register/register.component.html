@@ -7,11 +7,6 @@
         Sign up
       </h1>
 
-      <!-- Subheading -->
-      <p class="text-muted text-center mb-5">
-        Free access to our dashboard.
-      </p>
-
       <!-- Form -->
       <form #registerForm='ngForm'>
 
@@ -53,23 +48,16 @@
           </div>
         </div>
 
-        <div class="row justify-content-between">
-          <div class="col-auto">
-            <button class="btn btn-lg btn-block btn-danger mb-3" (click)='cancel()'>
-              cancel
-            </button>
-          </div>
-          <div class="col-auto">
-            <button class="btn btn-lg btn-block btn-primary mb-3" (click)='register()'>
-              Sign up
-            </button>
-          </div>
-        </div>
+
+        <button class="btn btn-lg btn-block btn-primary mb-3" (click)='register()'>
+          Sign up
+        </button>
+
 
         <!-- Link -->
         <div class="text-center">
           <small class="text-muted text-center">
-            Already have an account? <a href="sign-in-cover.html">Log in</a>.
+            Already have an account? <a [routerLink]="['/login']" routerLinkActive="router-link-active">Log in</a>.
           </small>
         </div>
 
@@ -80,7 +68,7 @@
 
       <!-- Image -->
       <div class="bg-cover vh-100 mt-n1 mr-n3"
-        style="background-image: url(assets/img/covers/bookshelf-auth-side-cover.jpg);"></div>
+        style="background-image: url(assets/img/covers/library-auth-side-cover.jpg);"></div>
 
     </div>
   </div> <!-- / .row -->

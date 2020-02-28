@@ -1,23 +1,52 @@
-import { Component, OnInit } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
+import { Component, OnInit } from '@angular/core';
+import { GoogleBookService } from '../_services/googleBook.service';
+import { Book } from '../_models/books.model';
+import { BookService } from '../_services/book.service';
+import { AlertifyService } from '../_services/alertify.service';
+import { Bookshelf } from '../_models/bookshelf.model';
+import { AuthService } from '../_services/auth.service';
+import { BookshelfService } from '../_services/bookshelf.service';
 
 @Component({
-  selector: "app-book",
-  templateUrl: "./book.component.html",
-  styleUrls: ["./book.component.css"]
+  selector: 'app-book',
+  templateUrl: './book.component.html',
+  styleUrls: ['./book.component.css']
 })
 export class BookComponent implements OnInit {
-  values: any;
+  constructor(
+    private googleBookService: GoogleBookService,
+    private bookService: BookService,
+    private alertifyService: AlertifyService,
+    private authService: AuthService,
+    private bookshelfService: BookshelfService
+  ) {}
 
-  constructor(private http: HttpClient) {}
+  books: Book[];
+  userBookshelves: Bookshelf[];
 
   ngOnInit() {
-    this.getValues();
+    const userId = this.authService.decodedToken.nameid;
+    this.bookshelfService
+      .getBookshelves()
+      .subscribe(next => (this.userBookshelves = next));
   }
 
-  getValues() {
-    this.http.get("http://localhost:5000/api/values").subscribe(response => {
-      this.values = response;
-    });
+  searchBooks(f) {
+    this.googleBookService
+      .searchBooks(f.value.inputSearch)
+      .subscribe((books: Book[]) => {
+        this.books = books;
+      });
   }
+
+  addBook(book: Book, bookshelfId: string) {
+    this.bookshelfService.addBook(book, parseInt(bookshelfId)).subscribe(
+      () => {
+        this.alertifyService.success('book successfully added');
+      },
+      error => {
+        this.alertifyService.error('an error occured, please try again later');
+      }
+    );
+  }  
 }

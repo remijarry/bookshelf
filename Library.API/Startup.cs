@@ -43,6 +43,11 @@ namespace Library.API
             services.AddCors();
 
             services.AddScoped<IAuthRepository, AuthRepository>();
+            services.AddScoped<IBookRepository, BookRepository>();
+            services.AddScoped<IBookshelfRepository, BookshelfRepository>();
+
+
+
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(opt =>
                 {

@@ -5,15 +5,19 @@ namespace Library.API.Models
 {
     public class Bookshelf : BaseEntity
     {
-        public string UserId { get; set; }
+        public int UserId { get; set; }
 
         public string Name { get; set; }
+
+        public string Description { get; set; }
+
+        public bool IsPublic { get; set; }
 
         public List<BookshelfBook> Books { get; private set; } = new List<BookshelfBook>();
 
         public void AddBook(Book book)
         {
-            if (!Books.Any(b => b.BookId == book.Id))
+            if (!Books.Any(b => b.BookshelfId == Id))
             {
                 Books.Add(new BookshelfBook { Book = book });
                 return;

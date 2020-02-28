@@ -15,22 +15,18 @@ namespace Library.API.Models
 
         public Review Review { get; set; }
 
-        public string Synopsis { get; set; }
-
         public string Editor { get; set; }
 
         public int Length { get; set; }
 
-        public bool ToRead { get; set; }
-
-        public bool HaveRead { get; set; }
-
-        public bool Favorite { get; set; }
-
-        public bool Reading { get; set; }
-
         public DateTime DateFinished { get; set; }
 
         public DateTime DateStarted { get; set; }
+
+        public string ImageLink { get; set; }
+
+        public string Description { get; set; }
+
+        public string GoogleBookId { get; set; }
     }
 }

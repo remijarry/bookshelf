@@ -17,8 +17,10 @@ namespace Library.API.Controllers
     {
         private readonly IAuthRepository _repository;
         private readonly IConfiguration _configuration;
-        public AuthController(IAuthRepository repository, IConfiguration configuration)
+        private readonly IBookshelfRepository _bookshelfRepository;
+        public AuthController(IAuthRepository repository, IConfiguration configuration, IBookshelfRepository bookshelfRepository)
         {
+            _bookshelfRepository = bookshelfRepository;
             _configuration = configuration;
             _repository = repository;
         }
@@ -33,6 +35,7 @@ namespace Library.API.Controllers
 
             var userToCreate = new User { UserName = userDto.UserName };
             var createdUser = await _repository.Register(userToCreate, userDto.Password);
+            await _bookshelfRepository.CreateInitialBookshelves(createdUser.Id);
 
             return StatusCode(201);
         }

@@ -26,41 +26,12 @@ namespace Library.API.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("FirstName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("LastName")
+                    b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
                     b.ToTable("Authors");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            FirstName = "Aurélien",
-                            LastName = "Barrau"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            FirstName = "Hugo",
-                            LastName = "Clément"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            FirstName = "Paul",
-                            LastName = "Dubois"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            FirstName = "Florian",
-                            LastName = "Zeller"
-                        });
                 });
 
             modelBuilder.Entity("Library.API.Models.Book", b =>
@@ -76,35 +47,29 @@ namespace Library.API.Migrations
                     b.Property<DateTime>("DateStarted")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Editor")
+                    b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("Favorite")
-                        .HasColumnType("bit");
+                    b.Property<string>("Editor")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("GenreId")
                         .HasColumnType("int");
 
-                    b.Property<bool>("HaveRead")
-                        .HasColumnType("bit");
+                    b.Property<string>("GoogleBookId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ImageLink")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Length")
                         .HasColumnType("int");
 
-                    b.Property<bool>("Reading")
-                        .HasColumnType("bit");
-
                     b.Property<int?>("ReviewId")
                         .HasColumnType("int");
 
-                    b.Property<string>("Synopsis")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Title")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("ToRead")
-                        .HasColumnType("bit");
 
                     b.HasKey("Id");
 
@@ -113,60 +78,6 @@ namespace Library.API.Migrations
                     b.HasIndex("ReviewId");
 
                     b.ToTable("Books");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            DateFinished = new DateTime(2020, 2, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DateStarted = new DateTime(2020, 2, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Editor = "Editions de l'Olivier",
-                            Favorite = false,
-                            HaveRead = true,
-                            Length = 233,
-                            Reading = false,
-                            Title = "Tous les hommes n'habitent pas le monde de la même façon",
-                            ToRead = false
-                        },
-                        new
-                        {
-                            Id = 2,
-                            DateFinished = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DateStarted = new DateTime(2020, 2, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Editor = "Le Seuil",
-                            Favorite = false,
-                            HaveRead = false,
-                            Length = 180,
-                            Reading = true,
-                            Title = "Comment j'ai arrêté de manger les animaux",
-                            ToRead = false
-                        },
-                        new
-                        {
-                            Id = 3,
-                            DateFinished = new DateTime(2020, 2, 13, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DateStarted = new DateTime(2020, 2, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Editor = "Michel Lafon",
-                            Favorite = false,
-                            HaveRead = true,
-                            Length = 143,
-                            Reading = false,
-                            Title = "Le plus grand défi de l'histoire de l'humanité",
-                            ToRead = false
-                        },
-                        new
-                        {
-                            Id = 4,
-                            DateFinished = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DateStarted = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Editor = "Gallimard",
-                            Favorite = false,
-                            HaveRead = false,
-                            Length = 160,
-                            Reading = false,
-                            Title = "La jouissance",
-                            ToRead = true
-                        });
                 });
 
             modelBuilder.Entity("Library.API.Models.BookAuthor", b =>
@@ -182,28 +93,6 @@ namespace Library.API.Migrations
                     b.HasIndex("AuthorId");
 
                     b.ToTable("BookAuthor");
-
-                    b.HasData(
-                        new
-                        {
-                            BookId = 3,
-                            AuthorId = 1
-                        },
-                        new
-                        {
-                            BookId = 2,
-                            AuthorId = 2
-                        },
-                        new
-                        {
-                            BookId = 1,
-                            AuthorId = 3
-                        },
-                        new
-                        {
-                            BookId = 4,
-                            AuthorId = 4
-                        });
                 });
 
             modelBuilder.Entity("Library.API.Models.Bookshelf", b =>
@@ -213,11 +102,17 @@ namespace Library.API.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsPublic")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -236,7 +131,7 @@ namespace Library.API.Migrations
 
                     b.HasIndex("BookshelfId");
 
-                    b.ToTable("BookshelfBook");
+                    b.ToTable("BookshelfBooks");
                 });
 
             modelBuilder.Entity("Library.API.Models.Genre", b =>
@@ -252,63 +147,6 @@ namespace Library.API.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Genres");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Name = "Fantasy"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Name = "Science fiction"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Name = "Horror"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Name = "Western"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            Name = "Romance"
-                        },
-                        new
-                        {
-                            Id = 6,
-                            Name = "Thriller"
-                        },
-                        new
-                        {
-                            Id = 7,
-                            Name = "Mystery"
-                        },
-                        new
-                        {
-                            Id = 8,
-                            Name = "Detective"
-                        },
-                        new
-                        {
-                            Id = 9,
-                            Name = "Dystopia"
-                        },
-                        new
-                        {
-                            Id = 10,
-                            Name = "Memoir"
-                        },
-                        new
-                        {
-                            Id = 11,
-                            Name = "Biography"
-                        });
                 });
 
             modelBuilder.Entity("Library.API.Models.Review", b =>

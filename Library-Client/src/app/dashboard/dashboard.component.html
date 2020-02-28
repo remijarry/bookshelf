@@ -1,0 +1,142 @@
+<div class="main-content">
+    <!-- HEADER -->
+    <div class="header">
+        <div class="container">
+
+            <!-- Body -->
+            <div class="header-body">
+                <div class="row align-items-end">
+                    <div class="col">
+
+                        <!-- Pretitle -->
+                        <h6 class="header-pretitle">
+                            Overview
+                        </h6>
+
+                        <!-- Title -->
+                        <h1 class="header-title">
+                            Dashboard
+                        </h1>
+
+                    </div>
+                    <div class="col-auto">
+
+                        <!-- Button -->
+                        <a [routerLink]="['/add-book']" class="btn btn-primary">
+                            Add a book
+                        </a>
+
+                    </div>
+                </div> <!-- / .row -->
+            </div> <!-- / .header-body -->
+
+        </div>
+    </div> <!-- / .header -->
+    <!-- CARDS -->
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-xl-8">
+
+                <!-- Activity -->
+                <div class="card">
+                    <div class="card-header">
+
+                        <!-- Title -->
+                        <h4 class="card-header-title">
+                            Activity
+                        </h4>
+
+                        <!-- Caption -->
+                        <span class="text-muted mr-3">
+                            Last year comparision:
+                        </span>
+
+                        <!-- Switch -->
+                        <div class="custom-control custom-switch">
+                            <input type="checkbox" class="custom-control-input" id="cardToggle" data-toggle="chart"
+                                data-target="#conversionsChart" data-trigger="change" data-action="add"
+                                data-dataset="1" />
+                            <label class="custom-control-label" for="cardToggle"></label>
+                        </div>
+
+                    </div>
+                    <div class="card-body">
+
+                        <!-- Chart -->
+                        <div class="chart">
+                            <canvas id="conversionsChart" class="chart-canvas">
+                            </canvas>
+                            <span>ChartJS coming here</span>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-xl-4">
+
+                <!-- Genres -->
+                <div class="card">
+                    <div class="card-header">
+
+                        <!-- Title -->
+                        <h4 class="card-header-title">
+                            Read Genres
+                        </h4>
+                    </div>
+                    <div class="card-body">
+
+                        <!-- Chart -->
+                        <div class="chart chart-appended">
+                            <canvas id="trafficChart" class="chart-canvas" data-toggle="legend"
+                                data-target="#trafficChartLegend"></canvas>
+                            <span>ChartJS coming here</span>
+                        </div>
+
+                        <!-- Legend -->
+                        <div id="trafficChartLegend" class="chart-legend"></div>
+
+                    </div>
+                </div>
+            </div>
+        </div> <!-- / .row -->
+        <div class="row">
+
+            <div class="col-12 col-xl-4">
+
+                <!-- To Read -->
+                <div class="card">
+                    <div class="card-header">
+
+                        <!-- Title -->
+                        <h4 class="card-header-title">
+                            To Read
+                        </h4>
+
+                    </div>
+                    <div class="card-body">
+                        Caroussel coming here
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-xl-8">
+
+                <!-- Reading Now -->
+                <div class="card">
+                    <div class="card-header">
+
+                        <!-- Title -->
+                        <h4 class="card-header-title">
+                            Reading Now
+                        </h4>
+                    </div>
+                    <div class="card-body">
+                        <span> List of books coming here</span>
+
+                    </div>
+                </div>
+            </div>
+        </div> <!-- / .row -->
+    </div>
+
+
+</div><!-- / .main-content -->
