@@ -14,7 +14,7 @@ export class GoogleBookService {
 
   searchBooks(search: string) {
     const encodedURI = encodeURI(
-      `${this.baseUrl}${search}&key=${this.apiKey}&maxResults=12`
+      `${this.baseUrl}"${search}"&key=${this.apiKey}&maxResults=12`
     );
 
     return this.http.get(encodedURI).pipe(
@@ -26,6 +26,9 @@ export class GoogleBookService {
           book.authors = item.volumeInfo.authors;
           book.publisher = item.volumeInfo.publisher;
           // book.publishedDate = item.volumeInfo.publishedDate;
+          // console.log(item);
+          book.pageCount = item.volumeInfo.pageCount;
+          book.category = item.volumeInfo.categories;
           book.description = item.volumeInfo.description;
           if (
             'imageLinks' in item.volumeInfo &&
@@ -37,6 +40,35 @@ export class GoogleBookService {
           }
           return book;
         });
+      })
+    );
+  }
+
+  getById(bookId: string) {
+    const url = encodeURI(
+      `https://www.googleapis.com/books/v1/volumes/${bookId}?key=${this.apiKey}`
+    );
+    return this.http.get(url).pipe(
+      map((response: any) => {
+        // console.log('hi there', response);
+        const book = new Book();
+        book.googleBookId = response.id;
+        book.title = response.volumeInfo.title;
+        book.authors = response.volumeInfo.authors;
+        book.publisher = response.volumeInfo.publisher;
+        // book.publishedDate = item.volumeInfo.publishedDate;
+        book.pageCount = response.volumeInfo.pageCount;
+        book.category = response.volumeInfo.categories;
+        book.description = response.volumeInfo.description;
+        if (
+          'imageLinks' in response.volumeInfo &&
+          'thumbnail' in response.volumeInfo.imageLinks
+        ) {
+          book.imageLink = response.volumeInfo.imageLinks.thumbnail;
+        } else {
+          book.imageLink = '';
+        }
+        return book;
       })
     );
   }

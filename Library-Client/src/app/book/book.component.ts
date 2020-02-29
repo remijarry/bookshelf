@@ -31,14 +31,6 @@ export class BookComponent implements OnInit {
       .subscribe(next => (this.userBookshelves = next));
   }
 
-  searchBooks(f) {
-    this.googleBookService
-      .searchBooks(f.value.inputSearch)
-      .subscribe((books: Book[]) => {
-        this.books = books;
-      });
-  }
-
   addBook(book: Book, bookshelfId: string) {
     this.bookshelfService.addBook(book, parseInt(bookshelfId)).subscribe(
       () => {
@@ -48,5 +40,5 @@ export class BookComponent implements OnInit {
         this.alertifyService.error('an error occured, please try again later');
       }
     );
-  }  
+  }
 }

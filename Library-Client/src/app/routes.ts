@@ -4,20 +4,20 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { AuthGuard } from './_guard/auth.guard';
 import { BookComponent } from './Book/Book.component';
+import { BookDetailsComponent } from './book-details/book-details.component';
 
 export const appRoutes: Routes = [
-  {
-      path: '',
-      runGuardsAndResolvers: 'always',
-      canActivate: [AuthGuard],
-      children: [
-        { path: 'home', component: HomeComponent },
-        { path: 'add-book', component: BookComponent },
-
-      ]
-  },
+  { path: 'home', component: HomeComponent },
+  { path: 'book-details/:id', component: BookDetailsComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
+  { path: '**', redirectTo: '/home', pathMatch: 'full' },
 
-  { path: '**', redirectTo: 'HomeComponent', pathMatch: 'full' }
+  // {
+  //   path: '',
+  //   runGuardsAndResolvers: 'always',
+  //   canActivate: [AuthGuard],
+  //   children: [{ path: 'add-book', component: BookComponent }]
+  // },
+
 ];

@@ -1,1 +1,58 @@
-<app-dashboard></app-dashboard>
+<div class="container mt-3">
+    <form (ngSubmit)="searchBooks(f)" #f="ngForm">
+        <div class="form-row">
+            <div class="col-10 col-md-10 mb-3">
+                <input type="text" class="form-control" ngModel name="inputSearch" required
+                    placeholder="Search a book by title">
+            </div>
+            <div class="col-2 col-md-2 mb-3">
+                <button class="btn btn-primary btn-block" [disabled]="f.invalid" type="submit">
+                    <i class="fas fa-search">Search</i>
+                </button>
+
+            </div>
+        </div>
+    </form>
+
+    <div>
+        <div class="container">
+            <!-- Tab content -->
+            <div class="tab-content">
+                <div class="tab-pane fade active show" id="tabPaneOne" role="tabpanel">
+                    <div class="row listAlias">
+                        <div *ngFor="let book of books" class="col-12 col-md-6 col-xl-3">
+                            <!-- Card -->
+                            <div class="card lift" routerLink='/book-details/${{book.googleBookId}}'>
+                                <!-- Image -->
+                                <a>
+                                    <img *ngIf="!book.imageLink" src="../../assets/img/books/img-not-available.JPG"
+                                        alt="book cover" class="card-img-top">
+                                    <img *ngIf="book.imageLink" src="{{book.imageLink}}" alt="book cover"
+                                        class="card-img-top">
+                                </a>
+                                <!-- Body -->
+                                <div class="card-body">
+                                    <div class="row align-items-center">
+                                        <div class="col">
+                                            <!-- Title -->
+                                            <h4 class="mb-2 name">
+                                                <a>{{book.title}}</a>
+                                            </h4>
+                                            <!-- Subtitle -->
+                                            <p class="card-text small text-muted">
+                                                {{book.authors}}
+                                            </p>
+                                        </div>
+                                    </div> <!-- / .row -->
+                                </div>
+                            </div>
+                        </div>
+
+                    </div> <!-- / .row -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <router-outlet></router-outlet>
+    <!-- <app-dashboard></app-dashboard> -->

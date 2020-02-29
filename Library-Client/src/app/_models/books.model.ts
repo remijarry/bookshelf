@@ -9,4 +9,6 @@ export class Book {
   description: string;
   userId: number;
   bookshelfId: number;
+  pageCount: number;
+  category: string[];
 }
