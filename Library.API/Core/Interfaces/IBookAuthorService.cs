@@ -4,8 +4,9 @@ using Library.API.Models;
 
 namespace Library.API.Core.Interfaces
 {
-    public interface IBookCategoryService
+    public interface IBookAuthorService
     {
-         Task<List<BookCategory>> AddCategoriesFromBook(List<string> categories, Book book);
+         Task<List<BookAuthor>> AddAuthorsFromBook(List<string> authors, Book book);
+         
     }
 }

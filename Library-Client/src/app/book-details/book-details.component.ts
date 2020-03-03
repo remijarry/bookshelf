@@ -13,7 +13,7 @@ import { BookService } from '../_services/book.service';
   templateUrl: './book-details.component.html',
   styleUrls: ['./book-details.component.css']
 })
-export class BookDetailsComponent implements OnInit, AfterContentInit {
+export class BookDetailsComponent implements OnInit {
   book: Book;
   bookDescriptionFirstSentence;
   isCollapsed = true;
@@ -36,9 +36,6 @@ export class BookDetailsComponent implements OnInit, AfterContentInit {
         .getBookshelves()
         .subscribe(next => (this.userBookshelves = next));
     }
-  }
-
-  ngAfterContentInit(): void {
     this.getBook();
   }
 

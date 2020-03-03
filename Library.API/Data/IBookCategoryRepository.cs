@@ -6,6 +6,6 @@ namespace Library.API.Data
 {
     public interface IBookCategoryRepository
     {
-         Task<List<BookCategory>> AddCategoriesToBook(List<BookCategory> bookCategories);
+         Task<List<BookCategory>> AddCategoriesFromBook(List<BookCategory> bookCategories);
     }
 }

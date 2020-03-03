@@ -6,7 +6,6 @@
       <img src="../assets/img/logo.svg" alt="..." class="navbar-brand-img">
     </a>
 
-
     <!-- User -->
     <div *ngIf='loggedIn()' class="navbar-user">
 
@@ -276,6 +275,7 @@
       </div>
 
     </div>
+    
     <div *ngIf='!loggedIn()' class="navbar-user">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item">
@@ -292,5 +292,39 @@
         </li>
       </ul>
     </div>
+
+    <!-- Collapse -->
+    <div class="collapse navbar-collapse mr-auto order-lg-first" id="navbar">
+
+      <!-- Navigation -->
+      <ul *ngIf='loggedIn()' class="navbar-nav mr-auto">
+        <li class="nav-item dropdown">
+          <a class="nav-link @@if(category=='dashboards'){active}" [routerLink]="['/dashboard']"  id="topnavDashboards" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Dashboards
+          </a>
+          <!-- <ul class="dropdown-menu" aria-labelledby="topnavDashboards">
+            <li>
+              <a class="dropdown-item @@if(page=='index.html'){active}" href="@@webRoot/index.html">
+                Default
+              </a>
+            </li>
+            <li>
+              <a class="dropdown-item @@if(page=='dashboard-project-management.html'){active}" href="@@webRoot/dashboard-project-management.html">
+                Project Management
+              </a>
+            </li>
+            <li>
+              <a class="dropdown-item @@if(page=='dashboard-ecommerce.html'){active}" href="@@webRoot/dashboard-ecommerce.html">
+                E-Commerce
+              </a>
+            </li>
+          </ul> -->
+        </li>
+      </ul>
+
+    </div>
+
+
+    
   </div> <!-- / .container -->
 </nav>

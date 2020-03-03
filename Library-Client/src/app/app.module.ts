@@ -21,36 +21,29 @@ import { LoginComponent } from './login/login.component';
 import { appRoutes } from './routes';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { BookDetailsComponent } from './book-details/book-details.component';
-import { SidenavComponent } from './sidenav/sidenav.component';
 
 @NgModule({
-   declarations: [
-      AppComponent,
-      BookComponent,
-      NavComponent,
-      HomeComponent,
-      RegisterComponent,
-      LoginComponent,
-      DashboardComponent,
-      BookDetailsComponent,
-      SidenavComponent
-   ],
-   imports: [
-      BrowserModule,
-      HttpClientModule,
-      FormsModule,
-      RouterModule.forRoot(appRoutes),
-      BsDropdownModule.forRoot(),
-      CarouselModule.forRoot(),
-      CollapseModule.forRoot(),
-      BrowserAnimationsModule
-   ],
-   providers: [
-      AuthService,
-      ErrorInterceptorProvider
-   ],
-   bootstrap: [
-      AppComponent
-   ]
+  declarations: [
+    AppComponent,
+    BookComponent,
+    NavComponent,
+    HomeComponent,
+    RegisterComponent,
+    LoginComponent,
+    DashboardComponent,
+    BookDetailsComponent,
+  ],
+  imports: [
+    BrowserModule,
+    HttpClientModule,
+    FormsModule,
+    RouterModule.forRoot(appRoutes),
+    BsDropdownModule.forRoot(),
+    CarouselModule.forRoot(),
+    CollapseModule.forRoot(),
+    BrowserAnimationsModule
+  ],
+  providers: [AuthService, ErrorInterceptorProvider],
+  bootstrap: [AppComponent]
 })
 export class AppModule {}

@@ -1,7 +1,7 @@
 <div class="container mt-3">
   <!-- Title -->
   <h1 class="header-title">
-    {{book.title}}
+    {{book?.title}}
   </h1>
 
   <div class="row align-items-center mt-3">
@@ -9,7 +9,7 @@
 
       <!-- Avatar -->
       <a class="avatar avatar-lg">
-        <img src="{{book.imageLink}}" alt="book cover" class="avatar-img rounded">
+        <img src="{{book?.imageLink}}" alt="book cover" class="avatar-img rounded">
       </a>
 
     </div>
@@ -17,12 +17,12 @@
 
       <!-- Title -->
       <h4 class="mb-1 name">
-        <a href="#!">{{book.title}}</a>
+        <a href="#!">{{book?.title}}</a>
       </h4>
 
       <!-- Text -->
       <p class="card-text small text-muted mb-3">
-        {{book.publisher}} - {{book.pageCount}} pages
+        {{book?.publisher}} - {{book?.pageCount}} pages
       </p>
       <p class="card-text small text-muted" [innerHTML]="bookDescriptionFirstSentence"></p>
 
@@ -63,7 +63,7 @@
     <div class="col-auto">
       <hr>
       <p class="card-text small text-muted" id="collapseBasic" [collapse]="isCollapsed" [isAnimated]="true"
-        [innerHTML]="book.description">
+        [innerHTML]="book?.description">
       </p>
     </div>
   </div>
