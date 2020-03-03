@@ -21,6 +21,7 @@ import { LoginComponent } from './login/login.component';
 import { appRoutes } from './routes';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { BookDetailsComponent } from './book-details/book-details.component';
+import { SidenavComponent } from './sidenav/sidenav.component';
 
 @NgModule({
    declarations: [
@@ -31,7 +32,8 @@ import { BookDetailsComponent } from './book-details/book-details.component';
       RegisterComponent,
       LoginComponent,
       DashboardComponent,
-      BookDetailsComponent
+      BookDetailsComponent,
+      SidenavComponent
    ],
    imports: [
       BrowserModule,
@@ -41,7 +43,7 @@ import { BookDetailsComponent } from './book-details/book-details.component';
       BsDropdownModule.forRoot(),
       CarouselModule.forRoot(),
       CollapseModule.forRoot(),
-      BrowserAnimationsModule,
+      BrowserAnimationsModule
    ],
    providers: [
       AuthService,

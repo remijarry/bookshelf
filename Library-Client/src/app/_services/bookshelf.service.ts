@@ -15,12 +15,6 @@ export class BookshelfService {
     private authService: AuthService
   ) {}
 
-  addBook(book: Book, bookshelfId: number) {
-    const userId = parseInt(this.authService.decodedToken.nameid, 10);
-    book.userId = userId;
-    book.bookshelfId = bookshelfId;
-    return this.httpClient.post(this.baseUrl + 'add', book);
-  }
 
   getBookshelves() {
     const userId = parseInt(this.authService.decodedToken.nameid, 10);

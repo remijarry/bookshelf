@@ -32,7 +32,7 @@ export class BookComponent implements OnInit {
   }
 
   addBook(book: Book, bookshelfId: string) {
-    this.bookshelfService.addBook(book, parseInt(bookshelfId)).subscribe(
+    this.bookService.addBook(book, parseInt(bookshelfId)).subscribe(
       () => {
         this.alertifyService.success('book successfully added');
       },

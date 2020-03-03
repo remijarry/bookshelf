@@ -10,5 +10,5 @@ export class Book {
   userId: number;
   bookshelfId: number;
   pageCount: number;
-  category: string[];
+  categories: string[];
 }

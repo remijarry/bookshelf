@@ -4,8 +4,10 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using Library.API.Core.Interfaces;
 using Library.API.Data;
 using Library.API.Data.Repositories;
+using Library.API.Data.Services;
 using Library.API.Helpers;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -42,10 +44,16 @@ namespace Library.API
             services.AddControllers();
             services.AddCors();
 
+            // todo: Could use extension method class or Autofac
             services.AddScoped<IAuthRepository, AuthRepository>();
             services.AddScoped<IBookRepository, BookRepository>();
             services.AddScoped<IBookshelfRepository, BookshelfRepository>();
+            services.AddScoped<ICategoryRepository, CategoryRepository>();
+            services.AddScoped<IAuthorRepository, AuthorRepository>();
+            services.AddScoped<IBookCategoryRepository, BookCategoryRepository>();
 
+            services.AddScoped<IBookService, BookService>();
+            services.AddScoped<IBookCategoryService, BookCategoryService>();
 
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)

@@ -9,15 +9,15 @@ namespace Library.API.Models
 
         public IEnumerable<BookAuthor> BookAuthors { get; set; } = new List<BookAuthor>();
 
-        public Genre Genre { get; set; }
+        public List<BookCategory> Categories { get; set; } = new List<BookCategory>();
 
         public string Title { get; set; }
 
         public Review Review { get; set; }
 
-        public string Editor { get; set; }
+        public string Publisher { get; set; }
 
-        public int Length { get; set; }
+        public int PageCount { get; set; }
 
         public DateTime DateFinished { get; set; }
 

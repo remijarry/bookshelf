@@ -29,5 +29,38 @@ namespace Library.API.Data.Repositories
         {
             return await _context.Books.Where(b => b.BookshelveBooks.Any(b => b.Bookshelf.Name == "To read")).ToListAsync();
         }
+
+        public async Task<bool> BookExists(string googleId)
+        {
+            return await _context.Books.AnyAsync(b => b.GoogleBookId == googleId);
+        }
+
+        public async Task<Book> AddBook(Book book, int userId, int bookshelfId)
+        {
+            var userBookshelf = await _context.Bookshelves
+            .Include(bs => bs.Books)
+            .FirstOrDefaultAsync(bs => bs.Id == bookshelfId && bs.UserId == userId);
+
+            userBookshelf.AddBook(book);
+
+            await _context.SaveChangesAsync();
+            return book;
+        }
+
+        public async Task<Book> AddExistingBook(string googleBookId, int userId, int bookshelfId)
+        {
+            var book = await _context.Books.FirstOrDefaultAsync(b => b.GoogleBookId == googleBookId);
+            var bookshelve = await _context.Bookshelves.Include(b => b.Books).FirstOrDefaultAsync(bs => bs.Id == bookshelfId);
+
+            if (!bookshelve.Books.Any(b => b.BookId == book.Id))
+            {
+                var bookshelveBook = new BookshelfBook() { BookId = book.Id, BookshelfId = bookshelve.Id };
+                _context.BookshelfBooks.Add(bookshelveBook);
+                await _context.SaveChangesAsync();
+
+            }
+
+            return book;
+        }
     }
 }

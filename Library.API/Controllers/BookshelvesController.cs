@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Library.API.Controllers
 {
+    [Route("api/bookshelves")]
     public class BookshelvesController : BaseApiController
     {
         private readonly IBookshelfRepository _bookshelfRepository;
@@ -27,33 +28,6 @@ namespace Library.API.Controllers
                 bookshelvesDto.Add(new BookshelfForDisplayDto { Id = bookshelf.Id, userId = bookshelf.UserId, Name = bookshelf.Name, Description = bookshelf.Description, IsPublic = bookshelf.IsPublic });
             }
             return bookshelvesDto;
-        }
-
-        [HttpPost("add")]
-        public async Task<IActionResult> Add(BookDto bookDto)
-        {
-            var book = await _bookRepository.ByGoogleId(bookDto.GoogleBookId);
-
-            if (book == null)
-            {
-                var bookToCreate = new Book()
-                {
-                    Title = bookDto.Title,
-                    Editor = bookDto.Publisher,
-                    ImageLink = bookDto.ImageLink,
-                    Description = bookDto.Description,
-                    GoogleBookId = bookDto.GoogleBookId
-                };
-                var createdBook = await _bookshelfRepository.AddBook(bookToCreate, bookDto.UserId, bookDto.BookshelfId);
-            }
-            else
-            {
-                await _bookshelfRepository.AddExistingBook(book.Id, bookDto.UserId, bookDto.BookshelfId);
-            }
-
-
-
-            return StatusCode(201);
         }
 
     }

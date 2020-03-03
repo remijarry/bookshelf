@@ -8,7 +8,7 @@ import { map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class BookService {
-  baseUrl = 'http://localhost:5000/api/books/'; // todo: global variable
+  baseUrl = 'http://localhost:5000/api/bookshelves'; // todo: global variable
   userId: number;
 
   constructor(
@@ -19,7 +19,7 @@ export class BookService {
   }
 
   getReadingBooks() {
-    return this.httpClient.get(`${this.baseUrl}reading/${this.userId}`).pipe(
+    return this.httpClient.get(`${this.baseUrl}/${this.userId}/books/reading`).pipe(
       map((response: Book[]) => {
         return response;
       })
@@ -27,10 +27,17 @@ export class BookService {
   }
 
   getToReadBooks() {
-    return this.httpClient.get(`${this.baseUrl}toread/${this.userId}`).pipe(
+    return this.httpClient.get(`${this.baseUrl}/${this.userId}/books/toread`).pipe(
       map((response: Book[]) => {
         return response;
       })
     );
+  }
+
+  addBook(book: Book, bookshelfId: number) {
+    const userId = parseInt(this.authService.decodedToken.nameid, 10);
+    book.userId = userId;
+    book.bookshelfId = bookshelfId;
+    return this.httpClient.post(`${this.baseUrl}/${userId}/books/add`, book);
   }
 }

@@ -7,7 +7,7 @@ namespace Library.API.DTOs
         public int UserId { get; set; }
         public string Title { get; set; }
 
-        public List<AuthorDto> AuthorDto { get; set; }
+        public List<string> Authors { get; set; }
 
         public string Publisher { get; set; }
 
@@ -18,5 +18,9 @@ namespace Library.API.DTOs
         public int BookshelfId { get; set; }
 
         public string GoogleBookId { get; set; }
+
+        public List<string> Categories { get; set; }
+
+        public int PageCount { get; set; }
     }
 }

@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Library.API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20200228002847_Book Modified")]
-    partial class BookModified
+    [Migration("20200302092102_Initialisation")]
+    partial class Initialisation
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -52,30 +52,25 @@ namespace Library.API.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Editor")
+                    b.Property<string>("GoogleBookId")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("GenreId")
-                        .HasColumnType("int");
 
                     b.Property<string>("ImageLink")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Length")
+                    b.Property<int>("PageCount")
                         .HasColumnType("int");
+
+                    b.Property<string>("Publisher")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("ReviewId")
                         .HasColumnType("int");
-
-                    b.Property<string>("Synopsis")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Title")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("GenreId");
 
                     b.HasIndex("ReviewId");
 
@@ -95,6 +90,21 @@ namespace Library.API.Migrations
                     b.HasIndex("AuthorId");
 
                     b.ToTable("BookAuthor");
+                });
+
+            modelBuilder.Entity("Library.API.Models.BookCategory", b =>
+                {
+                    b.Property<int>("BookId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("int");
+
+                    b.HasKey("BookId", "CategoryId");
+
+                    b.HasIndex("CategoryId");
+
+                    b.ToTable("BookCategories");
                 });
 
             modelBuilder.Entity("Library.API.Models.Bookshelf", b =>
@@ -133,10 +143,10 @@ namespace Library.API.Migrations
 
                     b.HasIndex("BookshelfId");
 
-                    b.ToTable("BookshelfBook");
+                    b.ToTable("BookshelfBooks");
                 });
 
-            modelBuilder.Entity("Library.API.Models.Genre", b =>
+            modelBuilder.Entity("Library.API.Models.Category", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -148,7 +158,7 @@ namespace Library.API.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Genres");
+                    b.ToTable("Categories");
                 });
 
             modelBuilder.Entity("Library.API.Models.Review", b =>
@@ -192,10 +202,6 @@ namespace Library.API.Migrations
 
             modelBuilder.Entity("Library.API.Models.Book", b =>
                 {
-                    b.HasOne("Library.API.Models.Genre", "Genre")
-                        .WithMany()
-                        .HasForeignKey("GenreId");
-
                     b.HasOne("Library.API.Models.Review", "Review")
                         .WithMany()
                         .HasForeignKey("ReviewId");
@@ -212,6 +218,21 @@ namespace Library.API.Migrations
                     b.HasOne("Library.API.Models.Author", "Author")
                         .WithMany("BookAuthors")
                         .HasForeignKey("BookId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Library.API.Models.BookCategory", b =>
+                {
+                    b.HasOne("Library.API.Models.Category", "Category")
+                        .WithMany("Books")
+                        .HasForeignKey("BookId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Library.API.Models.Book", "Book")
+                        .WithMany("Categories")
+                        .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

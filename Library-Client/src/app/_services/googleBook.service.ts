@@ -28,7 +28,7 @@ export class GoogleBookService {
           // book.publishedDate = item.volumeInfo.publishedDate;
           // console.log(item);
           book.pageCount = item.volumeInfo.pageCount;
-          book.category = item.volumeInfo.categories;
+          book.categories = item.volumeInfo.categories;
           book.description = item.volumeInfo.description;
           if (
             'imageLinks' in item.volumeInfo &&
@@ -58,7 +58,7 @@ export class GoogleBookService {
         book.publisher = response.volumeInfo.publisher;
         // book.publishedDate = item.volumeInfo.publishedDate;
         book.pageCount = response.volumeInfo.pageCount;
-        book.category = response.volumeInfo.categories;
+        book.categories = response.volumeInfo.categories;
         book.description = response.volumeInfo.description;
         if (
           'imageLinks' in response.volumeInfo &&

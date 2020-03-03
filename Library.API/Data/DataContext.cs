@@ -11,9 +11,11 @@ namespace Library.API.Data
         public DbSet<Bookshelf> Bookshelves { get; set; }
         public DbSet<Book> Books { get; set; }
         public DbSet<Author> Authors { get; set; }
-        public DbSet<Genre> Genres { get; set; }
+        public DbSet<Category> Categories { get; set; }
         public DbSet<Review> Reviews { get; set; }
         public DbSet<User> Users { get; set; }
+
+        public DbSet<BookCategory> BookCategories { get; set; }
 
         public DbSet<BookshelfBook> BookshelfBooks { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -40,6 +42,16 @@ namespace Library.API.Data
 
             modelBuilder.Entity<BookAuthor>().HasOne(b => b.Author)
                 .WithMany(b => b.BookAuthors)
+                .HasForeignKey(b => b.BookId);
+
+            modelBuilder.Entity<BookCategory>().HasKey(b => new { b.BookId, b.CategoryId });
+
+            modelBuilder.Entity<BookCategory>().HasOne(b => b.Book)
+                .WithMany(b => b.Categories)
+                .HasForeignKey(b => b.CategoryId);
+
+            modelBuilder.Entity<BookCategory>().HasOne(b => b.Category)
+                .WithMany(b => b.Books)
                 .HasForeignKey(b => b.BookId);
             #endregion
         }

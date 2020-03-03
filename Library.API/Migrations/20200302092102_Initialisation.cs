@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Library.API.Migrations
 {
-    public partial class Init : Migration
+    public partial class Initialisation : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -37,7 +37,7 @@ namespace Library.API.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Genres",
+                name: "Categories",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -46,7 +46,7 @@ namespace Library.API.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Genres", x => x.Id);
+                    table.PrimaryKey("PK_Categories", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -84,28 +84,19 @@ namespace Library.API.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    GenreId = table.Column<int>(nullable: true),
                     Title = table.Column<string>(nullable: true),
                     ReviewId = table.Column<int>(nullable: true),
-                    Synopsis = table.Column<string>(nullable: true),
-                    Editor = table.Column<string>(nullable: true),
-                    Length = table.Column<int>(nullable: false),
-                    ToRead = table.Column<bool>(nullable: false),
-                    HaveRead = table.Column<bool>(nullable: false),
-                    Favourite = table.Column<bool>(nullable: false),
-                    Reading = table.Column<bool>(nullable: false),
+                    Publisher = table.Column<string>(nullable: true),
+                    PageCount = table.Column<int>(nullable: false),
                     DateFinished = table.Column<DateTime>(nullable: false),
-                    DateStarted = table.Column<DateTime>(nullable: false)
+                    DateStarted = table.Column<DateTime>(nullable: false),
+                    ImageLink = table.Column<string>(nullable: true),
+                    Description = table.Column<string>(nullable: true),
+                    GoogleBookId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Books", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Books_Genres_GenreId",
-                        column: x => x.GenreId,
-                        principalTable: "Genres",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Books_Reviews_ReviewId",
                         column: x => x.ReviewId,
@@ -139,7 +130,31 @@ namespace Library.API.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "BookshelfBook",
+                name: "BookCategories",
+                columns: table => new
+                {
+                    BookId = table.Column<int>(nullable: false),
+                    CategoryId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_BookCategories", x => new { x.BookId, x.CategoryId });
+                    table.ForeignKey(
+                        name: "FK_BookCategories_Categories_BookId",
+                        column: x => x.BookId,
+                        principalTable: "Categories",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_BookCategories_Books_CategoryId",
+                        column: x => x.CategoryId,
+                        principalTable: "Books",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "BookshelfBooks",
                 columns: table => new
                 {
                     BookshelfId = table.Column<int>(nullable: false),
@@ -147,15 +162,15 @@ namespace Library.API.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_BookshelfBook", x => new { x.BookId, x.BookshelfId });
+                    table.PrimaryKey("PK_BookshelfBooks", x => new { x.BookId, x.BookshelfId });
                     table.ForeignKey(
-                        name: "FK_BookshelfBook_Books_BookId",
+                        name: "FK_BookshelfBooks_Books_BookId",
                         column: x => x.BookId,
                         principalTable: "Books",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_BookshelfBook_Bookshelves_BookshelfId",
+                        name: "FK_BookshelfBooks_Bookshelves_BookshelfId",
                         column: x => x.BookshelfId,
                         principalTable: "Bookshelves",
                         principalColumn: "Id",
@@ -168,9 +183,9 @@ namespace Library.API.Migrations
                 column: "AuthorId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Books_GenreId",
-                table: "Books",
-                column: "GenreId");
+                name: "IX_BookCategories_CategoryId",
+                table: "BookCategories",
+                column: "CategoryId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Books_ReviewId",
@@ -178,8 +193,8 @@ namespace Library.API.Migrations
                 column: "ReviewId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_BookshelfBook_BookshelfId",
-                table: "BookshelfBook",
+                name: "IX_BookshelfBooks_BookshelfId",
+                table: "BookshelfBooks",
                 column: "BookshelfId");
         }
 
@@ -189,7 +204,10 @@ namespace Library.API.Migrations
                 name: "BookAuthor");
 
             migrationBuilder.DropTable(
-                name: "BookshelfBook");
+                name: "BookCategories");
+
+            migrationBuilder.DropTable(
+                name: "BookshelfBooks");
 
             migrationBuilder.DropTable(
                 name: "Users");
@@ -198,13 +216,13 @@ namespace Library.API.Migrations
                 name: "Authors");
 
             migrationBuilder.DropTable(
+                name: "Categories");
+
+            migrationBuilder.DropTable(
                 name: "Books");
 
             migrationBuilder.DropTable(
                 name: "Bookshelves");
-
-            migrationBuilder.DropTable(
-                name: "Genres");
 
             migrationBuilder.DropTable(
                 name: "Reviews");

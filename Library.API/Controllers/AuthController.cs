@@ -13,6 +13,7 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace Library.API.Controllers
 {
+    [Route("api/auth")]
     public class AuthController : BaseApiController
     {
         private readonly IAuthRepository _repository;

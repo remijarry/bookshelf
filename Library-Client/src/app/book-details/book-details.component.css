@@ -3,3 +3,7 @@
     height: 12rem;
     font-size: 1.33333rem;
 }
+
+.dropdown-item:hover {
+    cursor: pointer;
+}

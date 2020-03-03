@@ -5,6 +5,8 @@ import { GoogleBookService } from '../_services/googleBook.service';
 import { AuthService } from '../_services/auth.service';
 import { BookshelfService } from '../_services/bookshelf.service';
 import { Bookshelf } from '../_models/bookshelf.model';
+import { AlertifyService } from '../_services/alertify.service';
+import { BookService } from '../_services/book.service';
 
 @Component({
   selector: 'app-book-details',
@@ -22,7 +24,9 @@ export class BookDetailsComponent implements OnInit, AfterContentInit {
     private route: ActivatedRoute,
     private googleBookService: GoogleBookService,
     private authService: AuthService,
-    private bookshelfService: BookshelfService
+    private bookshelfService: BookshelfService,
+    private bookService: BookService,
+    private alertifyService: AlertifyService
   ) {}
 
   ngOnInit() {
@@ -47,5 +51,18 @@ export class BookDetailsComponent implements OnInit, AfterContentInit {
         this.book.description.indexOf('.') + 1
       );
     });
+  }
+
+  addbook(book: Book, bookshelfId: number) {
+    if (this.isLoggedIn) {
+      this.bookService.addBook(book, bookshelfId).subscribe(
+        () => {
+          this.alertifyService.success('Book successfuly added');
+        },
+        error => {
+          this.alertifyService.error('An error occured');
+        }
+      );
+    }
   }
 }
