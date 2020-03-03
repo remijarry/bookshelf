@@ -15,7 +15,7 @@ namespace Library.API.Data.Repositories
             _context = context;
         }
 
-        public async Task CreateInitialBookshelves(int userId)
+        public async Task CreateInitialBookshelves(int userId) // this belongs in a separate SeedData method, not part of production repository
         {
             var bookshelves = new List<Bookshelf>()
             {

@@ -14,7 +14,7 @@ using Microsoft.IdentityModel.Tokens;
 namespace Library.API.Controllers
 {
     [Route("api/auth")]
-    public class AuthController : BaseApiController
+    public class AuthController : BaseApiController // it's good you have JWT token security built-in
     {
         private readonly IAuthRepository _repository;
         private readonly IConfiguration _configuration;
@@ -38,7 +38,7 @@ namespace Library.API.Controllers
             var createdUser = await _repository.Register(userToCreate, userDto.Password);
             await _bookshelfRepository.CreateInitialBookshelves(createdUser.Id);
 
-            return StatusCode(201);
+            return StatusCode(201); // consider returning Created() with the createdUser and Uri
         }
 
         [HttpPost("login")]
@@ -47,6 +47,8 @@ namespace Library.API.Controllers
             var userFromRepo = await _repository.Login(userForLoginDto.UserName.ToLower(), userForLoginDto.Password);
             if (userFromRepo == null)
                 return Unauthorized();
+
+            // everything below here dealing with claims/token creation should probably be in a security service, not a controller
 
             var claims = new[]
             {

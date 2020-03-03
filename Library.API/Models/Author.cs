@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Library.API.Models
+namespace Library.API.Models // probably could move this under Core.Model or Core.Entities
 {
     public class Author : BaseEntity
     {

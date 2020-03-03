@@ -105,6 +105,9 @@ namespace Library.API
 
             app.UseAuthorization();
 
+            // I suggest adding Swagger/OpenAPI to make it easy to view and test your API in the browser
+            // https://docs.microsoft.com/en-us/aspnet/core/tutorials/getting-started-with-swashbuckle?view=aspnetcore-3.1&tabs=visual-studio
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();

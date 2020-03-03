@@ -22,12 +22,12 @@ namespace Library.API.Data.Repositories
 
         public async Task<List<Book>> GetReadingBooks(int userId)
         {
-            return await _context.Books.Where(b => b.BookshelveBooks.Any(b => b.Bookshelf.Name == "Reading")).ToListAsync();
+            return await _context.Books.Where(b => b.BookshelveBooks.Any(bb => bb.Bookshelf.Name == "Reading")).ToListAsync();
         }
 
         public async Task<List<Book>> GetToReadBooks(int userId)
         {
-            return await _context.Books.Where(b => b.BookshelveBooks.Any(b => b.Bookshelf.Name == "To read")).ToListAsync();
+            return await _context.Books.Where(b => b.BookshelveBooks.Any(bb => bb.Bookshelf.Name == "To read")).ToListAsync();
         }
 
         public async Task<bool> BookExists(string googleId)
@@ -41,6 +41,8 @@ namespace Library.API.Data.Repositories
             .Include(bs => bs.Books)
             .FirstOrDefaultAsync(bs => bs.Id == bookshelfId && bs.UserId == userId);
 
+            // what if it's null?
+
             userBookshelf.AddBook(book);
 
             await _context.SaveChangesAsync();
@@ -52,12 +54,13 @@ namespace Library.API.Data.Repositories
             var book = await _context.Books.FirstOrDefaultAsync(b => b.GoogleBookId == googleBookId);
             var bookshelve = await _context.Bookshelves.Include(b => b.Books).FirstOrDefaultAsync(bs => bs.Id == bookshelfId);
 
+            // handle nulls
+
             if (!bookshelve.Books.Any(b => b.BookId == book.Id))
             {
                 var bookshelveBook = new BookshelfBook() { BookId = book.Id, BookshelfId = bookshelve.Id };
                 _context.BookshelfBooks.Add(bookshelveBook);
                 await _context.SaveChangesAsync();
-
             }
 
             return book;

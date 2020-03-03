@@ -10,10 +10,10 @@ namespace Library.API.Data.Services
     public class BookService : IBookService
     {
         private readonly IBookRepository _bookRepository;
-        private readonly IAuthorRepository _authorRepository;
-        private readonly ICategoryRepository _categoryRepository;
+        private readonly IAuthorRepository _authorRepository; // unused
+        private readonly ICategoryRepository _categoryRepository; // unused
         private readonly IBookCategoryService _bookCategoryService;
-        private readonly DataContext _context;
+        private readonly DataContext _context; // unused - which is good since this isn't a repository
 
         public BookService(
             IBookRepository bookRepository,
@@ -28,13 +28,10 @@ namespace Library.API.Data.Services
             _bookCategoryService = bookCategoryService;
             _context = context;
             _bookRepository = bookRepository;
-
         }
 
         public async Task<Book> AddBook(BookDto bookDto)
         {
-
-
             if (!await _bookRepository.BookExists(bookDto.GoogleBookId))
             {
                 // List<BookAuthor> authors = GetAuthors(bookDto.Authors);
@@ -58,7 +55,6 @@ namespace Library.API.Data.Services
             else
             {
                 return await _bookRepository.AddExistingBook(bookDto.GoogleBookId, bookDto.UserId, bookDto.BookshelfId);
-
             }
         }
     }

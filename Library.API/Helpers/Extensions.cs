@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace Library.API.Helpers
 {
-    public static class Extensions
+    public static class Extensions // name this specific to what it is extending, e.g. HttpResponseExtensions
     {
         public static void AddApplicationError(this HttpResponse response, string message)
         {

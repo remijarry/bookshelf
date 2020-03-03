@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 [Route("api/[controller]")]
 [ApiController]
 [Authorize]
-public class ValuesController : ControllerBase
+public class ValuesController : ControllerBase // assuming you're not using this it could be deleted
 {
     // GET api/values
     [HttpGet]

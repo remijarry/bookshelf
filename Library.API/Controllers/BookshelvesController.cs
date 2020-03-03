@@ -11,7 +11,7 @@ namespace Library.API.Controllers
     public class BookshelvesController : BaseApiController
     {
         private readonly IBookshelfRepository _bookshelfRepository;
-        private readonly IBookRepository _bookRepository;
+        private readonly IBookRepository _bookRepository; // unused - remove
         public BookshelvesController(IBookshelfRepository bookshelfRepository, IBookRepository bookRepository)
         {
             _bookRepository = bookRepository;
@@ -25,7 +25,13 @@ namespace Library.API.Controllers
             var bookshelvesDto = new List<BookshelfForDisplayDto>(); // can use auto mapper for that
             foreach (var bookshelf in bookshelves)
             {
-                bookshelvesDto.Add(new BookshelfForDisplayDto { Id = bookshelf.Id, userId = bookshelf.UserId, Name = bookshelf.Name, Description = bookshelf.Description, IsPublic = bookshelf.IsPublic });
+                bookshelvesDto.Add(new BookshelfForDisplayDto { 
+                    Id = bookshelf.Id,
+                    userId = bookshelf.UserId, // why is userId lowercase?
+                    Name = bookshelf.Name, 
+                    Description = bookshelf.Description, 
+                    IsPublic = bookshelf.IsPublic
+                });
             }
             return bookshelvesDto;
         }
