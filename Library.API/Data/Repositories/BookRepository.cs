@@ -46,7 +46,7 @@ namespace Library.API.Data.Repositories
             userBookshelf.AddBook(book);
 
             await _context.SaveChangesAsync();
-            return book;
+            return await _context.Books.Include(b => b.BookAuthors).Include(b => b.Categories).FirstOrDefaultAsync(b => b.Id == book.Id);
         }
 
         public async Task<Book> AddExistingBook(string googleBookId, int userId, int bookshelfId)

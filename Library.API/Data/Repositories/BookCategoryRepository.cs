@@ -14,7 +14,7 @@ namespace Library.API.Data.Repositories
             _context = context;
         }
 
-        public async Task<List<BookCategory>> AddCategoriesToBook(List<BookCategory> bookCategories)
+        public async Task<List<BookCategory>> AddCategoriesFromBook(List<BookCategory> bookCategories)
         {
             await _context.BookCategories.AddRangeAsync(bookCategories);
             await _context.SaveChangesAsync();

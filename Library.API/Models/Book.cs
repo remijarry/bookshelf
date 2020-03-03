@@ -7,7 +7,7 @@ namespace Library.API.Models
     {
         public IEnumerable<BookshelfBook> BookshelveBooks { get; set; } = new List<BookshelfBook>();
 
-        public IEnumerable<BookAuthor> BookAuthors { get; set; } = new List<BookAuthor>();
+        public List<BookAuthor> BookAuthors { get; set; } = new List<BookAuthor>();
 
         public List<BookCategory> Categories { get; set; } = new List<BookCategory>();
 

@@ -45,15 +45,10 @@ namespace Library.API
             services.AddCors();
 
             // todo: Could use extension method class or Autofac
-            services.AddScoped<IAuthRepository, AuthRepository>();
-            services.AddScoped<IBookRepository, BookRepository>();
-            services.AddScoped<IBookshelfRepository, BookshelfRepository>();
-            services.AddScoped<ICategoryRepository, CategoryRepository>();
-            services.AddScoped<IAuthorRepository, AuthorRepository>();
-            services.AddScoped<IBookCategoryRepository, BookCategoryRepository>();
+            services.AddRepositories();
+            services.AddServices();
 
-            services.AddScoped<IBookService, BookService>();
-            services.AddScoped<IBookCategoryService, BookCategoryService>();
+
 
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
