@@ -12,32 +12,21 @@ namespace Library.API.Data.Services
         private readonly IBookRepository _bookRepository;
         private readonly IAuthorRepository _authorRepository;
         private readonly ICategoryRepository _categoryRepository;
-        private readonly IBookCategoryService _bookCategoryService;
-        private readonly IBookAuthorService _bookAuthorService;
-        private readonly DataContext _context;
 
         public BookService(
             IBookRepository bookRepository,
             IAuthorRepository authorRepository,
-            ICategoryRepository categoryRepository,
-            IBookCategoryService bookCategoryService,
-            IBookAuthorService bookAuthorService,
-            DataContext context
+            ICategoryRepository categoryRepository
             )
         {
             _authorRepository = authorRepository;
             _categoryRepository = categoryRepository;
-            _bookCategoryService = bookCategoryService;
-            _bookAuthorService = bookAuthorService;
-            _context = context;
             _bookRepository = bookRepository;
 
         }
 
         public async Task<Book> AddBook(BookDto bookDto)
         {
-
-
             if (!await _bookRepository.BookExists(bookDto.GoogleBookId))
             {
                 List<Author> authors = await GetAuthors(bookDto.Authors);
@@ -71,8 +60,22 @@ namespace Library.API.Data.Services
             else
             {
                 return await _bookRepository.AddExistingBook(bookDto.GoogleBookId, bookDto.UserId, bookDto.BookshelfId);
-
             }
+        }
+
+        public async Task<Book> GetById(int bookId)
+        {
+            return await _bookRepository.GetById(bookId);
+        }
+
+        public Task<List<Book>> GetReadingBooks(int userId)
+        {
+            return _bookRepository.GetReadingBooks(userId);
+        }
+
+        public Task<List<Book>> GetToReadBooks(int userId)
+        {
+            return _bookRepository.GetToReadBooks(userId);
         }
 
         private async Task<List<Author>> GetAuthors(List<string> authors)

@@ -62,5 +62,10 @@ namespace Library.API.Data.Repositories
 
             return book;
         }
+
+        public async Task<Book> GetById(int bookId)
+        {
+            return await _context.Books.FirstOrDefaultAsync(b => b.Id == bookId);
+        }
     }
 }

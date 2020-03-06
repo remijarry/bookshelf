@@ -14,5 +14,6 @@ namespace Library.API.Data
 
         Task<Book> AddBook(Book book, int userId, int bookshelfId);
         Task<Book> AddExistingBook(string googleBookId, int userId, int bookshelfId);
+        Task<Book> GetById(int bookId);
     }
 }
