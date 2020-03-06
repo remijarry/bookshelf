@@ -1,18 +1,16 @@
+using Library.API.Core.Models;
+using Library.API.Repositories.Data;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Library.API.Models;
 
 namespace Library.API.Data.Repositories
 {
     public class BookCategoryRepository : IBookCategoryRepository
     {
         private readonly DataContext _context;
-        private readonly ICategoryRepository _categoryRepository;
-        public BookCategoryRepository(DataContext context, ICategoryRepository categoryRepository)
+        public BookCategoryRepository(DataContext context)
         {
-            _categoryRepository = categoryRepository;
             _context = context;
-
         }
 
         public async Task<List<BookCategory>> AddCategoriesFromBook(List<BookCategory> bookCategories)

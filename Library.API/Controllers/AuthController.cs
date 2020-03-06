@@ -1,15 +1,14 @@
+using Library.API.Core.Models;
+using Library.API.DTOs;
+using Library.API.Repositories.Data;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
 using System;
-using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
-using Library.API.Data;
-using Library.API.DTOs;
-using Library.API.Models;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
-using Microsoft.IdentityModel.Tokens;
 
 namespace Library.API.Controllers
 {

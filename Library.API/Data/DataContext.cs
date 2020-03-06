@@ -1,5 +1,5 @@
 using System;
-using Library.API.Models;
+using Library.API.Core.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace Library.API.Data
@@ -31,6 +31,9 @@ namespace Library.API.Data
             modelBuilder.Entity<BookshelfBook>().HasOne(b => b.Bookshelf)
                 .WithMany(b => b.Books)
                 .HasForeignKey(b => b.BookshelfId);
+            var navigation = modelBuilder.Entity<Bookshelf>()
+                .Metadata.FindNavigation(nameof(Bookshelf.Books));
+            navigation.SetPropertyAccessMode(PropertyAccessMode.Field);
 
 
 

@@ -1,8 +1,8 @@
-using Library.API.Core.Interfaces;
-using Library.API.Data;
+using Library.API.Core.Services.Interfaces;
 using Library.API.Data.Repositories;
-using Library.API.Data.Services;
+using Library.API.Core.Services;
 using Microsoft.Extensions.DependencyInjection;
+using Library.API.Repositories.Data;
 
 namespace Library.API.Helpers
 {

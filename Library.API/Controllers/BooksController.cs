@@ -1,8 +1,8 @@
 using System.Threading.Tasks;
-using Library.API.Core.Interfaces;
+using Library.API.Core.Services.Interfaces;
 using Library.API.Data;
 using Library.API.DTOs;
-using Library.API.Models;
+using Library.API.Core.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Library.API.Controllers
@@ -11,10 +11,8 @@ namespace Library.API.Controllers
     public class BooksController : BaseApiController
     {
         private readonly IBookService _bookService;
-        private readonly IBookCategoryService _bookCategoryService;
-        public BooksController(IBookService bookService, IBookCategoryService bookCategoryService)
+        public BooksController(IBookService bookService)
         {
-            _bookCategoryService = bookCategoryService;
             _bookService = bookService;
         }
 
@@ -42,7 +40,7 @@ namespace Library.API.Controllers
         public async Task<IActionResult> Add([FromBody] BookDto bookDto)
         {
             var createdBook = await _bookService.AddBook(bookDto);
-            return Ok(); // todo: return bookDto
+            return Ok(); // todo: return bookDto - gérer les références circulaires JSON causées par les many to many
         }
     }
 }

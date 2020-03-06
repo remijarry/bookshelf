@@ -1,6 +1,7 @@
-using System.Threading.Tasks;
-using Library.API.Models;
+using Library.API.Core.Models;
+using Library.API.Repositories.Data;
 using Microsoft.EntityFrameworkCore;
+using System.Threading.Tasks;
 
 namespace Library.API.Data.Repositories
 {

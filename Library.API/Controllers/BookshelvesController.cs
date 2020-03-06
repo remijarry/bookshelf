@@ -1,9 +1,8 @@
+using Library.API.DTOs;
+using Library.API.Repositories.Data;
+using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Library.API.Data;
-using Library.API.DTOs;
-using Library.API.Models;
-using Microsoft.AspNetCore.Mvc;
 
 namespace Library.API.Controllers
 {
